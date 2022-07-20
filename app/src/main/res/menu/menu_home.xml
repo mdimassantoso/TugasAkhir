@@ -3,19 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/navigation_monitoring"
+        android:id="@+id/monitoring"
         android:icon="@drawable/ic_monitoring"
         android:title="@string/label_monitoring"
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/navigation_controlling"
+        android:id="@+id/controlling"
         android:icon="@drawable/ic_controlling"
         android:title="@string/label_controlling"
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/navigation_setting"
+        android:id="@+id/setting"
         android:icon="@drawable/ic_setting"
         android:title="@string/label_setting"
         app:showAsAction="ifRoom" />
