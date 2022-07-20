@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">msm</string>
+    <string name="label_monitoring">Monitoring</string>
+    <string name="label_controlling">Controlling</string>
+    <string name="label_setting">Setting</string>
+    <string name="label_login">Login</string>
+    <string name="label_mushroom_growers">Mushroom Growers</string>
+    <string name="label_email">Email</string>
+    <string name="label_password">Password</string>
+    <string name="label_masuk">Masuk</string>
+    <string name="label_registrasi">Registrasi</string>
 </resources>

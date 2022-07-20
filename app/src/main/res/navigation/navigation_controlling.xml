@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:startDestination="@id/controllingFragment"
+    android:id="@+id/navigation_controlling">
+
+    <fragment
+        android:id="@+id/controllingFragment"
+        android:name="com.app.msm.ui.main.controlling.ControllingFragment"
+        android:label="@string/label_controlling" />
+
+</navigation>

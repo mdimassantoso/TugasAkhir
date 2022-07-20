@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_monitoring"
+    app:startDestination="@id/monitoringFragment">
+
+    <fragment
+        android:id="@+id/monitoringFragment"
+        android:name="com.app.msm.ui.main.monitoring.MonitoringFragment"
+        android:label="@string/label_monitoring" />
+
+</navigation>

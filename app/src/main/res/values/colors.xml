@@ -7,4 +7,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <!-- msm -->
+    <color name="bg_teal">#6FDFCB</color>
+    <color name="green">#59F423</color>
 </resources>
