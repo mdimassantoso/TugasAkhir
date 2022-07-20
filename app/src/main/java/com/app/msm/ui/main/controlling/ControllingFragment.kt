@@ -11,6 +11,10 @@ class ControllingFragment : Fragment(R.layout.fragment_controlling) {
 
     private val binding by viewBinding(FragmentControllingBinding::bind)
 
+    private val controllingAdapter by lazy {
+        ControllingAdapter { control -> }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }

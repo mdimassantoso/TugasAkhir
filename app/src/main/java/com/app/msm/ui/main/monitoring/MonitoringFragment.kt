@@ -11,6 +11,8 @@ class MonitoringFragment : Fragment(R.layout.fragment_monitoring) {
 
     private val binding by viewBinding(FragmentMonitoringBinding::bind)
 
+    private val monitoringAdapter by lazy { MonitoringAdapter() }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }
