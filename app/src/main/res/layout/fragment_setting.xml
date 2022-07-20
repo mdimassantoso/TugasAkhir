@@ -1,6 +1,349 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="8dp"
+    app:layout_optimizationLevel="none">
 
-</FrameLayout>
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvLabelWateringSchedule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_jadwal_penyiraman"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvLabelWateringOne"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/label_penyiraman_satu"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/edtWateringOne"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintHorizontal_weight="0.3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvLabelWateringSchedule" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/edtWateringOne"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/bg_white_rounded"
+        app:layout_constraintBottom_toBottomOf="@id/tvLabelWateringOne"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="0.7"
+        app:layout_constraintStart_toEndOf="@id/tvLabelWateringOne"
+        app:layout_constraintTop_toTopOf="@id/tvLabelWateringOne"
+        app:layout_constraintVertical_bias="0" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/brWateringOne"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="edtWateringOne, tvLabelWateringOne" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvLabelWateringTwo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/label_penyiraman_satu"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/edtWateringTwo"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintHorizontal_weight="0.3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/brWateringOne" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/edtWateringTwo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/bg_white_rounded"
+        app:layout_constraintBottom_toBottomOf="@id/tvLabelWateringTwo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="0.7"
+        app:layout_constraintStart_toEndOf="@id/tvLabelWateringTwo"
+        app:layout_constraintTop_toTopOf="@id/tvLabelWateringTwo"
+        app:layout_constraintVertical_bias="0" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/brWateringTwo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="edtWateringTwo, tvLabelWateringTwo" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvLabelWateringThree"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/label_penyiraman_satu"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/edtWateringThree"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintHorizontal_weight="0.3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/brWateringTwo" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/edtWateringThree"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/bg_white_rounded"
+        app:layout_constraintBottom_toBottomOf="@id/tvLabelWateringThree"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="0.7"
+        app:layout_constraintStart_toEndOf="@id/tvLabelWateringThree"
+        app:layout_constraintTop_toTopOf="@id/tvLabelWateringThree"
+        app:layout_constraintVertical_bias="0" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/brWateringThree"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="edtWateringThree, tvLabelWateringThree" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvLabelTempLimit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/label_batas_suhu"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/brWateringThree" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvLabelTempUpperLimit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/label_batas_atas_suhu"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/edtTempUpperLimit"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintHorizontal_weight="0.3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvLabelTempLimit" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/edtTempUpperLimit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/bg_white_rounded"
+        app:layout_constraintBottom_toBottomOf="@id/tvLabelTempUpperLimit"
+        app:layout_constraintEnd_toStartOf="@id/tvLabelTempUpperUnit"
+        app:layout_constraintHorizontal_weight="0.7"
+        app:layout_constraintStart_toEndOf="@id/tvLabelTempUpperLimit"
+        app:layout_constraintTop_toTopOf="@id/tvLabelTempUpperLimit"
+        app:layout_constraintVertical_bias="0" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvLabelTempUpperUnit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="@string/label_celcius"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/edtTempUpperLimit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/edtTempUpperLimit" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/brTempUpperLimit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="edtTempUpperLimit, tvLabelTempUpperLimit, tvLabelTempUpperUnit" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvLabelTempLowerLimit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/label_batas_bawah_suhu"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/edtTempLowerLimit"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintHorizontal_weight="0.3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/brTempUpperLimit" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/edtTempLowerLimit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/bg_white_rounded"
+        app:layout_constraintBottom_toBottomOf="@id/tvLabelTempLowerLimit"
+        app:layout_constraintEnd_toStartOf="@id/tvLabelTempLowerUnit"
+        app:layout_constraintHorizontal_weight="0.7"
+        app:layout_constraintStart_toEndOf="@id/tvLabelTempLowerLimit"
+        app:layout_constraintTop_toTopOf="@id/tvLabelTempLowerLimit"
+        app:layout_constraintVertical_bias="0" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvLabelTempLowerUnit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_celcius"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/edtTempLowerLimit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/edtTempLowerLimit" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/brTempLowerLimit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="edtTempLowerLimit, tvLabelTempLowerLimit, tvLabelTempLowerUnit" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvLabelHumidityLimit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/label_batas_kelembaban"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/brTempLowerLimit" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvLabelHumUpperLimit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/label_batas_atas_kelembapan"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/edtHumUpperLimit"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintHorizontal_weight="0.3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvLabelHumidityLimit" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/edtHumUpperLimit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/bg_white_rounded"
+        app:layout_constraintBottom_toBottomOf="@id/tvLabelHumUpperLimit"
+        app:layout_constraintEnd_toStartOf="@id/tvLabelHumUpperUnit"
+        app:layout_constraintHorizontal_weight="0.7"
+        app:layout_constraintStart_toEndOf="@id/tvLabelHumUpperLimit"
+        app:layout_constraintTop_toTopOf="@id/tvLabelHumUpperLimit"
+        app:layout_constraintVertical_bias="0" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvLabelHumUpperUnit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_percent"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/edtHumUpperLimit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/edtHumUpperLimit" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/brHumUpperLimit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="edtHumUpperLimit, tvLabelHumUpperLimit, tvLabelHumUpperUnit" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvLabelHumLowerLimit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/label_batas_bawah_kelembapan"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/edtHumLowerLimit"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintHorizontal_weight="0.3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/brHumUpperLimit" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/edtHumLowerLimit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/bg_white_rounded"
+        app:layout_constraintBottom_toBottomOf="@id/tvLabelHumLowerLimit"
+        app:layout_constraintEnd_toStartOf="@id/tvLabelHumLowerUnit"
+        app:layout_constraintHorizontal_weight="0.7"
+        app:layout_constraintStart_toEndOf="@id/tvLabelHumLowerLimit"
+        app:layout_constraintTop_toTopOf="@id/tvLabelHumLowerLimit"
+        app:layout_constraintVertical_bias="0" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvLabelHumLowerUnit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_percent"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/edtHumLowerLimit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/edtHumLowerLimit" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/brHumLowerLimit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="edtHumLowerLimit, tvLabelHumLowerLimit, tvLabelHumLowerUnit" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnAction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/label_ubah"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/brHumLowerLimit"
+        app:layout_constraintVertical_bias="0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

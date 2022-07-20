@@ -9,4 +9,15 @@
     <string name="label_password">Password</string>
     <string name="label_masuk">Masuk</string>
     <string name="label_registrasi">Registrasi</string>
+    <string name="label_jadwal_penyiraman">Jadwal Penyiraman</string>
+    <string name="label_penyiraman_satu">Penyiraman 1</string>
+    <string name="label_batas_suhu">Batas Suhu</string>
+    <string name="label_batas_atas_suhu">Batas Atas Suhu</string>
+    <string name="label_celcius">C</string>
+    <string name="label_batas_bawah_suhu">Batas Bawah Suhu</string>
+    <string name="label_batas_kelembaban">Batas Kelembaban</string>
+    <string name="label_batas_atas_kelembapan">Batas Atas Kelembapan</string>
+    <string name="label_percent">%</string>
+    <string name="label_batas_bawah_kelembapan">Batas Bawah Kelembapan</string>
+    <string name="label_ubah">Ubah</string>
 </resources>
