@@ -1,4 +1,4 @@
-package com.app.msm.api
+package com.app.msm.data.api
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase

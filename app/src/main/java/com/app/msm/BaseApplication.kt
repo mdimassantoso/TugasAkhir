@@ -1,7 +1,8 @@
 package com.app.msm
 
 import android.app.Application
-import com.app.msm.api.FirebaseProvider
+import com.app.msm.data.api.FirebaseProvider
+import com.app.msm.data.preferences.SharedPrefProvider
 import com.app.msm.helper.Helper
 import com.google.firebase.database.Logger
 import timber.log.Timber
@@ -10,8 +11,13 @@ class BaseApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        initAppPreferences()
         initFirebase()
         initTimber()
+    }
+
+    private fun initAppPreferences() {
+        SharedPrefProvider.initAppPreferences(this)
     }
 
     private fun initTimber() {
