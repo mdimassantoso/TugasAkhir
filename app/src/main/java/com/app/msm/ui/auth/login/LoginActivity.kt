@@ -2,6 +2,7 @@ package com.app.msm.ui.auth.login
 
 import android.content.Context
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.app.msm.databinding.ActivityLoginBinding
 import com.app.msm.extension.openActivity
@@ -11,6 +12,8 @@ import com.app.msm.ui.main.MainActivity
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
+
+    private val viewModel: LoginViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

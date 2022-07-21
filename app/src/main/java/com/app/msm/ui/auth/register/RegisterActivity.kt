@@ -2,14 +2,18 @@ package com.app.msm.ui.auth.register
 
 import android.content.Context
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.app.msm.databinding.ActivityRegisterBinding
 import com.app.msm.extension.openActivity
 import com.app.msm.ui.auth.login.LoginActivity
+import com.app.msm.ui.auth.login.LoginViewModel
 
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
+
+    private val viewModel: RegisterViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
