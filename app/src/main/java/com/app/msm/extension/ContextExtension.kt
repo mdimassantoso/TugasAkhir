@@ -2,6 +2,8 @@ package com.app.msm.extension
 
 import android.content.Context
 import android.content.Intent
+import android.view.View
+import com.google.android.material.snackbar.Snackbar
 
 fun <T> Context.openActivity(
     destination: Class<T>,
