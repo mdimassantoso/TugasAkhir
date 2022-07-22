@@ -42,7 +42,10 @@ class RegisterActivity : AppCompatActivity() {
     private fun handleRegisterViewState(viewState: ViewState<String>) {
         when (viewState) {
             is ViewState.Loading -> showLoading(true)
-            is ViewState.Error -> showSnackBar(viewState.e.message.orEmpty())
+            is ViewState.Error -> {
+                showLoading(false)
+                showSnackBar(viewState.e.message.orEmpty())
+            }
             is ViewState.Success -> {
                 showLoading(false)
                 navigateToLogin(clearTask = true)
@@ -79,9 +82,13 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun processRegister() = with(binding) {
-        val email = edtEmail.text.toString()
-        val password = edtPassword.text.toString()
-        viewModel.register(email, password)
+        val email = edtEmail.text.toString().trim()
+        val password = edtPassword.text.toString().trim()
+        when {
+            email.isEmpty() -> root.showSnackBar("Email cannot be empty")
+            password.isEmpty() -> root.showSnackBar("Password cannot be empty")
+            else -> viewModel.register(email, password)
+        }
     }
 
     companion object {

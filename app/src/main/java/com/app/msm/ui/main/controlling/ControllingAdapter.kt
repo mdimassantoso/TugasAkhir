@@ -1,6 +1,7 @@
 package com.app.msm.ui.main.controlling
 
 import android.view.ViewGroup
+import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -9,7 +10,8 @@ import com.app.msm.extension.inflateBinding
 import com.app.msm.model.Control
 
 class ControllingAdapter(
-    private val onItemChecked: (Control) -> Unit
+    private val onSwitchChecked: (Control) -> Unit,
+    private val onButtonClicked: (Control) -> Unit
 ) : ListAdapter<Control, RecyclerView.ViewHolder>(DIFF_UTIL) {
 
     override fun onCreateViewHolder(
@@ -32,6 +34,17 @@ class ControllingAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(control: Control) = with(binding) {
+            tvLabel.text = root.context.getString(control.label)
+            ivIcon.setImageResource(control.icon)
+            swControl.isInvisible = control.type is ControlType.Button
+
+            if (swControl.isInvisible) {
+                conContent.setOnClickListener { onButtonClicked.invoke(control) }
+            } else {
+                swControl.setOnCheckedChangeListener { _, isChecked ->
+                    onSwitchChecked.invoke(control.copy(type = ControlType.Switch(isChecked)))
+                }
+            }
         }
     }
 
@@ -40,7 +53,7 @@ class ControllingAdapter(
             override fun areItemsTheSame(
                 oldItem: Control,
                 newItem: Control
-            ): Boolean = oldItem.id == newItem.id && oldItem.isChecked == newItem.isChecked
+            ): Boolean = oldItem.id == newItem.id && oldItem.type == newItem.type
             override fun areContentsTheSame(
                 oldItem: Control,
                 newItem: Control

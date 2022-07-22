@@ -8,6 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <!-- msm -->
-    <color name="bg_teal">#6FDFCB</color>
     <color name="green">#59F423</color>
+    <color name="transparent">#00000000</color>
+    <color name="bg_teal">@color/teal_200</color>
+    <color name="main_svg_icon_tint">@color/black</color>
 </resources>

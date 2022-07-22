@@ -30,6 +30,8 @@ class MonitoringAdapter : ListAdapter<Monitor, RecyclerView.ViewHolder>(DIFF_UTI
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(monitor: Monitor) = with(binding) {
+            tvLabel.text = root.context.getString(monitor.label)
+            tvValue.text = monitor.value
         }
     }
 

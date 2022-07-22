@@ -24,7 +24,7 @@
             android:lines="2"
             android:maxLines="2"
             android:text="@string/label_jadwal_penyiraman"
-            android:textColor="@color/black"
+            
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
@@ -40,7 +40,7 @@
             android:lines="2"
             android:maxLines="2"
             android:text="@string/label_penyiraman_satu"
-            android:textColor="@color/black"
+            
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/edtWateringOne"
             app:layout_constraintEnd_toStartOf="@id/edtWateringOne"
@@ -56,7 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:background="@drawable/bg_white_rounded"
+            android:background="@drawable/bg_edit_text"
             android:inputType="none"
             android:padding="8dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -81,7 +81,7 @@
             android:lines="2"
             android:maxLines="2"
             android:text="@string/label_penyiraman_satu"
-            android:textColor="@color/black"
+            
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/edtWateringTwo"
             app:layout_constraintEnd_toStartOf="@id/edtWateringTwo"
@@ -96,7 +96,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:background="@drawable/bg_white_rounded"
+            android:background="@drawable/bg_edit_text"
             android:inputType="none"
             android:padding="8dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -121,7 +121,7 @@
             android:lines="2"
             android:maxLines="2"
             android:text="@string/label_penyiraman_satu"
-            android:textColor="@color/black"
+            
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/edtWateringThree"
             app:layout_constraintEnd_toStartOf="@id/edtWateringThree"
@@ -136,7 +136,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:background="@drawable/bg_white_rounded"
+            android:background="@drawable/bg_edit_text"
             android:inputType="none"
             android:padding="8dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -162,7 +162,7 @@
             android:lines="2"
             android:maxLines="2"
             android:text="@string/label_batas_suhu"
-            android:textColor="@color/black"
+            
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
@@ -178,7 +178,7 @@
             android:lines="2"
             android:maxLines="2"
             android:text="@string/label_batas_atas_suhu"
-            android:textColor="@color/black"
+            
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/edtTempUpperLimit"
             app:layout_constraintEnd_toStartOf="@id/edtTempUpperLimit"
@@ -194,7 +194,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
-            android:background="@drawable/bg_white_rounded"
+            android:background="@drawable/bg_edit_text"
             android:inputType="numberDecimal"
             android:padding="8dp"
             app:layout_constraintEnd_toStartOf="@id/tvLabelTempUpperUnit"
@@ -209,7 +209,7 @@
             android:layout_height="wrap_content"
 
             android:text="@string/label_celcius"
-            android:textColor="@color/black"
+            
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/edtTempUpperLimit"
             app:layout_constraintEnd_toEndOf="parent"
@@ -231,7 +231,7 @@
             android:lines="2"
             android:maxLines="2"
             android:text="@string/label_batas_bawah_suhu"
-            android:textColor="@color/black"
+            
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/edtTempLowerLimit"
             app:layout_constraintEnd_toStartOf="@id/edtTempLowerLimit"
@@ -247,7 +247,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
-            android:background="@drawable/bg_white_rounded"
+            android:background="@drawable/bg_edit_text"
             android:inputType="numberDecimal"
             android:padding="8dp"
             app:layout_constraintEnd_toStartOf="@id/tvLabelTempLowerUnit"
@@ -261,7 +261,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/label_celcius"
-            android:textColor="@color/black"
+            
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/edtTempLowerLimit"
             app:layout_constraintEnd_toEndOf="parent"
@@ -284,7 +284,7 @@
             android:lines="2"
             android:maxLines="2"
             android:text="@string/label_batas_kelembaban"
-            android:textColor="@color/black"
+            
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
@@ -300,7 +300,7 @@
             android:lines="2"
             android:maxLines="2"
             android:text="@string/label_batas_atas_kelembapan"
-            android:textColor="@color/black"
+            
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/edtHumUpperLimit"
             app:layout_constraintEnd_toStartOf="@id/edtHumUpperLimit"
@@ -316,7 +316,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
-            android:background="@drawable/bg_white_rounded"
+            android:background="@drawable/bg_edit_text"
             android:inputType="numberDecimal"
             android:padding="8dp"
             app:layout_constraintEnd_toStartOf="@id/tvLabelHumUpperUnit"
@@ -330,7 +330,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/label_percent"
-            android:textColor="@color/black"
+            
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/edtHumUpperLimit"
             app:layout_constraintEnd_toEndOf="parent"
@@ -352,7 +352,7 @@
             android:lines="2"
             android:maxLines="2"
             android:text="@string/label_batas_bawah_kelembapan"
-            android:textColor="@color/black"
+            
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/edtHumLowerLimit"
             app:layout_constraintEnd_toStartOf="@id/edtHumLowerLimit"
@@ -368,7 +368,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
-            android:background="@drawable/bg_white_rounded"
+            android:background="@drawable/bg_edit_text"
             android:inputType="numberDecimal"
             android:padding="8dp"
             app:layout_constraintEnd_toStartOf="@id/tvLabelHumLowerUnit"
@@ -382,7 +382,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/label_percent"
-            android:textColor="@color/black"
+            
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/edtHumLowerLimit"
             app:layout_constraintEnd_toEndOf="parent"
@@ -401,9 +401,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/bg_white_rounded"
+            android:background="@drawable/bg_edit_text"
             android:text="@string/label_ubah"
-            android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -411,6 +410,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/brHumLowerLimit"
             app:layout_constraintVertical_bias="0" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnLogout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/bg_edit_text"
+            android:text="@string/label_logout"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@id/btnAction"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -43,7 +43,10 @@ class LoginActivity : AppCompatActivity() {
     private fun handleLoginViewState(viewState: ViewState<String>) {
         when (viewState) {
             is ViewState.Loading -> showLoading(true)
-            is ViewState.Error -> showSnackBar(viewState.e.message.orEmpty())
+            is ViewState.Error -> {
+                showLoading(false)
+                showSnackBar(viewState.e.message.orEmpty())
+            }
             is ViewState.Success -> {
                 showLoading(false)
                 navigateToMain()
@@ -76,9 +79,13 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun processLogin() = with(binding) {
-        val email = edtEmail.text.toString()
-        val password = edtPassword.text.toString()
-        viewModel.login(email, password)
+        val email = edtEmail.text.toString().trim()
+        val password = edtPassword.text.toString().trim()
+        when {
+            email.isEmpty() -> root.showSnackBar("Email cannot be empty")
+            password.isEmpty() -> root.showSnackBar("Password cannot be empty")
+            else -> viewModel.login(email, password)
+        }
     }
 
     companion object {

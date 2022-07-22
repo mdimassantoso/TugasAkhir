@@ -3,19 +3,27 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable-night/bg_teal.xml" value="0.234" />
+        <entry key="app/src/main/res/drawable-night/selector_button_nav_color_state.xml" value="0.1045" />
+        <entry key="app/src/main/res/drawable-night/selector_edit_text_background.xml" value="0.234" />
+        <entry key="app/src/main/res/drawable-v21/bg_splash_screen.xml" value="0.1045" />
+        <entry key="app/src/main/res/drawable-v23/bg_splash_screen.xml" value="0.1045" />
+        <entry key="app/src/main/res/drawable/bg_dark_rounded.xml" value="0.234" />
         <entry key="app/src/main/res/drawable/bg_green_rounded.xml" value="0.214" />
+        <entry key="app/src/main/res/drawable/bg_splash_screen.xml" value="0.1045" />
         <entry key="app/src/main/res/drawable/bg_white_rounded.xml" value="0.214" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1045" />
         <entry key="app/src/main/res/drawable/ic_msm_title.xml" value="0.1045" />
         <entry key="app/src/main/res/drawable/ic_mushroom.xml" value="0.215" />
         <entry key="app/src/main/res/drawable/ic_setting.xml" value="0.215" />
         <entry key="app/src/main/res/drawable/selector_bottom_nav_color_state.xml" value="0.214" />
+        <entry key="app/src/main/res/drawable/selector_edit_text_background.xml" value="0.234" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.20677083333333332" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25146484375" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.20677083333333332" />
         <entry key="app/src/main/res/layout/fragment_controlling.xml" value="0.20677083333333332" />
         <entry key="app/src/main/res/layout/fragment_monitoring.xml" value="0.20677083333333332" />
-        <entry key="app/src/main/res/layout/fragment_setting.xml" value="0.33535353535353535" />
+        <entry key="app/src/main/res/layout/fragment_setting.xml" value="0.12225539082228534" />
         <entry key="app/src/main/res/layout/item_controlling.xml" value="0.20677083333333332" />
         <entry key="app/src/main/res/layout/item_monitoring.xml" value="0.30729420979817706" />
         <entry key="app/src/main/res/menu/menu_main.xml" value="0.20677083333333332" />
