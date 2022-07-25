@@ -40,7 +40,7 @@ class MonitoringAdapter : ListAdapter<Monitor, RecyclerView.ViewHolder>(DIFF_UTI
             override fun areItemsTheSame(
                 oldItem: Monitor,
                 newItem: Monitor
-            ): Boolean = oldItem.id == newItem.id && oldItem.value == newItem.value
+            ): Boolean = oldItem.id == newItem.id
             override fun areContentsTheSame(
                 oldItem: Monitor,
                 newItem: Monitor

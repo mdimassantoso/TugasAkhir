@@ -3,12 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable-night/bg_edit_text.xml" value="0.1045" />
         <entry key="app/src/main/res/drawable-night/bg_teal.xml" value="0.234" />
         <entry key="app/src/main/res/drawable-night/selector_button_nav_color_state.xml" value="0.1045" />
         <entry key="app/src/main/res/drawable-night/selector_edit_text_background.xml" value="0.234" />
         <entry key="app/src/main/res/drawable-v21/bg_splash_screen.xml" value="0.1045" />
         <entry key="app/src/main/res/drawable-v23/bg_splash_screen.xml" value="0.1045" />
         <entry key="app/src/main/res/drawable/bg_dark_rounded.xml" value="0.234" />
+        <entry key="app/src/main/res/drawable/bg_edit_text.xml" value="0.1045" />
         <entry key="app/src/main/res/drawable/bg_green_rounded.xml" value="0.214" />
         <entry key="app/src/main/res/drawable/bg_splash_screen.xml" value="0.1045" />
         <entry key="app/src/main/res/drawable/bg_white_rounded.xml" value="0.214" />
