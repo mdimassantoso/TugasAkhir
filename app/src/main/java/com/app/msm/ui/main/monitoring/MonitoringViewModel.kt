@@ -3,7 +3,7 @@ package com.app.msm.ui.main.monitoring
 import androidx.lifecycle.ViewModel
 import com.app.msm.R
 import com.app.msm.data.api.FirebaseProvider
-import com.app.msm.data.api.response.MonitoredDataResponse
+import com.app.msm.data.api.response.monitoring.MonitoredDataResponse
 import com.app.msm.model.Monitor
 import com.app.msm.vo.ViewState
 import com.google.firebase.database.DataSnapshot
@@ -18,9 +18,7 @@ class MonitoringViewModel : ViewModel() {
     private val _monitoringViewState: Channel<ViewState<List<Monitor>>> = Channel()
     val monitoringViewState = _monitoringViewState.receiveAsFlow()
 
-    private val monitoredDataReference: DatabaseReference by lazy {
-        FirebaseProvider.firebaseDatabase.getReference("msm")
-    }
+    private val msmDataReference: DatabaseReference by lazy { FirebaseProvider.msmReference }
 
     private val monitoredDataValueListener: ValueEventListener = object : ValueEventListener {
         override fun onDataChange(snapshot: DataSnapshot) = handleOnDataChange(snapshot)
@@ -32,11 +30,11 @@ class MonitoringViewModel : ViewModel() {
 
     fun listenToMonitoredData() {
         _monitoringViewState.trySend(ViewState.Loading)
-        monitoredDataReference.addValueEventListener(monitoredDataValueListener)
+        msmDataReference.addValueEventListener(monitoredDataValueListener)
     }
 
     fun removeMonitoredDataListener() {
-        monitoredDataReference.removeEventListener(monitoredDataValueListener)
+        msmDataReference.removeEventListener(monitoredDataValueListener)
     }
 
     private fun handleOnDataChange(snapshot: DataSnapshot) {

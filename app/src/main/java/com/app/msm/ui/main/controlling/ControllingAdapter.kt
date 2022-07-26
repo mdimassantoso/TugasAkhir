@@ -36,13 +36,20 @@ class ControllingAdapter(
         fun bind(control: Control) = with(binding) {
             tvLabel.text = root.context.getString(control.label)
             ivIcon.setImageResource(control.icon)
-            swControl.isInvisible = control.type is ControlType.Button
+            val controlType = control.type
+            swControl.isInvisible = controlType is ControlType.Button
 
-            if (swControl.isInvisible) {
-                conContent.setOnClickListener { onButtonClicked.invoke(control) }
-            } else {
-                swControl.setOnCheckedChangeListener { _, isChecked ->
-                    onSwitchChecked.invoke(control.copy(type = ControlType.Switch(isChecked)))
+            when (controlType) {
+                is ControlType.Switch -> {
+                    swControl.isChecked = controlType.isChecked
+                    swControl.setOnCheckedChangeListener { _, isChecked ->
+                        onSwitchChecked.invoke(
+                            control.copy(type = ControlType.Switch(isChecked))
+                        )
+                    }
+                }
+                is ControlType.Button -> {
+                    conContent.setOnClickListener { onButtonClicked.invoke(control) }
                 }
             }
         }
@@ -53,7 +60,7 @@ class ControllingAdapter(
             override fun areItemsTheSame(
                 oldItem: Control,
                 newItem: Control
-            ): Boolean = oldItem.id == newItem.id && oldItem.type == newItem.type
+            ): Boolean = oldItem.id == newItem.id
             override fun areContentsTheSame(
                 oldItem: Control,
                 newItem: Control

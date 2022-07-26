@@ -1,4 +1,4 @@
-package com.app.msm.data.api.response
+package com.app.msm.data.api.response.monitoring
 
 import com.google.firebase.database.PropertyName
 

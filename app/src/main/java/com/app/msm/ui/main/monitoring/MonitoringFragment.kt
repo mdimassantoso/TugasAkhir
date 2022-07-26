@@ -63,6 +63,7 @@ class MonitoringFragment : Fragment(R.layout.fragment_monitoring) {
         binding.rvMonitoring.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = monitoringAdapter
+            itemAnimator = null
         }
     }
 }
