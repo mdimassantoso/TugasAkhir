@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.app.msm.R
 import com.app.msm.data.api.FirebaseProvider
 import com.app.msm.data.api.response.monitoring.MonitoredDataResponse
+import com.app.msm.extension.orDash
 import com.app.msm.model.Monitor
 import com.app.msm.vo.ViewState
 import com.google.firebase.database.DataSnapshot
@@ -43,15 +44,15 @@ class MonitoringViewModel : ViewModel() {
             snapshot.getValue(MonitoredDataResponse::class.java)?.let { response ->
                 val blower = Monitor(
                     label = R.string.label_blower,
-                    value = response.blower?.value.orEmpty()
+                    value = response.blower?.value.orDash()
                 )
                 val kelembapan = Monitor(
                     label = R.string.label_kelembapan,
-                    value = response.kelembapan?.value.orEmpty()
+                    value = response.kelembapan?.value.orDash()
                 )
                 val suhu = Monitor(
                     label = R.string.label_suhu,
-                    value = response.suhu?.value.orEmpty()
+                    value = "${response.suhu?.value.orDash()}C"
                 )
                 monitors.addAll(listOf(blower, kelembapan, suhu))
             }

@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.app.msm.R
 import com.app.msm.data.api.FirebaseProvider
 import com.app.msm.data.api.response.controlling.ControllingDataResponse
+import com.app.msm.extension.toInt
 import com.app.msm.model.Control
 import com.app.msm.vo.ViewState
 import com.google.firebase.database.DataSnapshot
@@ -25,11 +26,10 @@ class ControllingViewModel : ViewModel() {
     private val msmDataReference: DatabaseReference by lazy { FirebaseProvider.msmReference }
 
     fun updateControllingData(databaseReference: DatabaseReference, turnOn: Boolean) {
-        val value = if (turnOn) 1 else 0
         with(_controllingActionState) {
             _controllingActionState.trySend(ViewState.Loading)
             databaseReference
-                .setValue(value)
+                .setValue(turnOn.toInt())
                 .addOnSuccessListener { trySend(ViewState.Success(turnOn)) }
                 .addOnCanceledListener { trySend(ViewState.Error(CancellationException())) }
                 .addOnFailureListener { exception ->
