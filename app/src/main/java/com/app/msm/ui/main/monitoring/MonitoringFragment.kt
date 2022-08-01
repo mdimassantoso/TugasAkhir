@@ -12,10 +12,7 @@ import com.app.msm.R
 import com.app.msm.databinding.FragmentMonitoringBinding
 import com.app.msm.extension.showSnackBar
 import com.app.msm.helper.viewBinding
-import com.app.msm.model.Control
-import com.app.msm.model.Monitor
-import com.app.msm.ui.main.controlling.ControlType
-import com.app.msm.ui.main.controlling.ControllingViewModel
+import com.app.msm.model.monitoring.Monitor
 import com.app.msm.vo.ViewState
 import kotlinx.coroutines.launch
 
@@ -31,7 +28,7 @@ class MonitoringFragment : Fragment(R.layout.fragment_monitoring) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
         initObserveResult()
-        viewModel.listenToMonitoredData()
+        viewModel.listenToMonitoring()
     }
 
     private fun initObserveResult() {
@@ -55,7 +52,7 @@ class MonitoringFragment : Fragment(R.layout.fragment_monitoring) {
     }
 
     override fun onDestroyView() {
-        viewModel.removeMonitoredDataListener()
+        viewModel.removeMonitoringListener()
         super.onDestroyView()
     }
 

@@ -13,7 +13,7 @@ import com.app.msm.data.api.FirebaseProvider
 import com.app.msm.databinding.FragmentControllingBinding
 import com.app.msm.extension.showSnackBar
 import com.app.msm.helper.viewBinding
-import com.app.msm.model.Control
+import com.app.msm.model.controlling.Control
 import com.app.msm.vo.ViewState
 import kotlinx.coroutines.launch
 
@@ -25,40 +25,45 @@ class ControllingFragment : Fragment(R.layout.fragment_controlling) {
 
     private val controllingAdapter by lazy {
         ControllingAdapter(
-            onSwitchChecked = { control -> onControllingChanged(control) },
-            onButtonClicked = { control -> onControllingChanged(control) }
+            onSwitchChecked = { id, isChecked -> onSwitchChanged(id, isChecked) },
+            onButtonClicked = { id -> onControllingChanged(id) }
         )
     }
 
-    private fun onControllingChanged(control: Control) {
-        val (reference, turnOn) = when (control.id) {
-            R.string.label_suhu -> {
-                val controlType = control.type as ControlType.Switch
-                FirebaseProvider.suhuStatusReference to controlType.isChecked
-            }
-            R.string.label_kelembapan -> {
-                val controlType = control.type as ControlType.Switch
-                FirebaseProvider.kelembapanStatusReference to controlType.isChecked
-            }
-            R.string.label_lampu -> {
-                val controlType = control.type as ControlType.Switch
-                FirebaseProvider.lampuStatusReference to controlType.isChecked
-            }
-            R.string.label_blower -> {
-                val controlType = control.type as ControlType.Switch
-                FirebaseProvider.blowerStatusReference to controlType.isChecked
-            }
-            R.string.label_download_laporan -> return
+    private fun onSwitchChanged(id: Int, isChecked: Boolean) {
+        val reference = when (id) {
+            R.string.label_watering -> FirebaseProvider.wateringControlReference
+            R.string.label_blower -> FirebaseProvider.blowerControlReference
+            R.string.label_lampu -> FirebaseProvider.lampControlReference
             else -> return
         }
-        viewModel.updateControllingData(reference, turnOn)
+        viewModel.updateControllingData(reference, isChecked)
+    }
+
+    private fun onControllingChanged(id: Int) {
+        when (id) {
+            R.string.label_view_image -> Unit // TODO get url & show image preview dialog
+            else -> return
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
         initObserveResult()
-        viewModel.listenToControllingData()
+        initListener()
+        listenToFirebase()
+    }
+
+    private fun listenToFirebase() {
+        viewModel.listenToAutoConfig()
+        viewModel.listenToControlling()
+    }
+
+    private fun initListener() = with(binding) {
+        swAutomatic.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.updateAutomaticConfiguration(isChecked)
+        }
     }
 
     private fun initObserveResult() {
@@ -77,17 +82,59 @@ class ControllingFragment : Fragment(R.layout.fragment_controlling) {
                 }
             }
         }
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.automaticSwitchViewState.collect { viewState ->
+                    handleAutomaticViewState(viewState)
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.automaticSwitchActionState.collect { actionState ->
+                    handleAutomaticActionState(actionState)
+                }
+            }
+        }
     }
 
-    private fun handleControllingActionState(actionState: ViewState<Boolean>) {
+    private fun handleAutomaticActionState(actionState: ViewState<Boolean>) = with(binding) {
+        swAutomatic.isEnabled = actionState !is ViewState.Loading
         when (actionState) {
             is ViewState.Loading -> Unit
             is ViewState.Error -> {
-                binding.root.showSnackBar(actionState.e.message.orEmpty())
+                root.showSnackBar(actionState.e.message.orEmpty())
             }
             is ViewState.Success -> {
                 val message = if (actionState.data) "Berhasil mengaktifkan" else "Berhasil mematikan"
-                binding.root.showSnackBar(message)
+                root.showSnackBar(message)
+            }
+        }
+    }
+
+    private fun handleAutomaticViewState(viewState: ViewState<Boolean>) = with(binding) {
+        swAutomatic.isEnabled = viewState !is ViewState.Loading
+        when (viewState) {
+            is ViewState.Loading -> Unit
+            is ViewState.Error -> {
+                root.showSnackBar(viewState.e.message.orEmpty())
+            }
+            is ViewState.Success -> swAutomatic.isChecked = viewState.data
+        }
+    }
+
+    private fun handleControllingActionState(actionState: ViewState<Boolean>) = with(binding) {
+        controllingAdapter.preventAction = actionState is ViewState.Loading
+        when (actionState) {
+            is ViewState.Loading -> Unit
+            is ViewState.Error -> {
+                root.showSnackBar(actionState.e.message.orEmpty())
+            }
+            is ViewState.Success -> {
+                val message = if (actionState.data) "Berhasil mengaktifkan" else "Berhasil mematikan"
+                root.showSnackBar(message)
             }
         }
     }
@@ -103,8 +150,13 @@ class ControllingFragment : Fragment(R.layout.fragment_controlling) {
     }
 
     override fun onDestroyView() {
-        viewModel.removeControllingDataListener()
+        removeFirebaseListener()
         super.onDestroyView()
+    }
+
+    private fun removeFirebaseListener() {
+        viewModel.removeAutoConfigListener()
+        viewModel.removeControllingListener()
     }
 
     private fun initRecyclerView() {

@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.app.msm.databinding.ItemMonitoringBinding
 import com.app.msm.extension.inflateBinding
-import com.app.msm.model.Monitor
+import com.app.msm.model.monitoring.Monitor
 
 class MonitoringAdapter : ListAdapter<Monitor, RecyclerView.ViewHolder>(DIFF_UTIL) {
 

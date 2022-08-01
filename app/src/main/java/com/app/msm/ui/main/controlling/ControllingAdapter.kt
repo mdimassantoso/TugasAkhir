@@ -7,11 +7,12 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.app.msm.databinding.ItemControllingBinding
 import com.app.msm.extension.inflateBinding
-import com.app.msm.model.Control
+import com.app.msm.model.controlling.Control
 
 class ControllingAdapter(
-    private val onSwitchChecked: (Control) -> Unit,
-    private val onButtonClicked: (Control) -> Unit
+    private val onSwitchChecked: (id: Int, isChecked: Boolean) -> Unit,
+    private val onButtonClicked: (id: Int) -> Unit,
+    var preventAction: Boolean = false
 ) : ListAdapter<Control, RecyclerView.ViewHolder>(DIFF_UTIL) {
 
     override fun onCreateViewHolder(
@@ -42,14 +43,18 @@ class ControllingAdapter(
             when (controlType) {
                 is ControlType.Switch -> {
                     swControl.isChecked = controlType.isChecked
-                    swControl.setOnCheckedChangeListener { _, isChecked ->
-                        onSwitchChecked.invoke(
-                            control.copy(type = ControlType.Switch(isChecked))
-                        )
+                    swControl.setOnCheckedChangeListener { switch, isChecked ->
+                        if (!preventAction) {
+                            onSwitchChecked.invoke(control.id, isChecked)
+                        } else {
+                            switch.isChecked = isChecked.not()
+                        }
                     }
                 }
                 is ControlType.Button -> {
-                    conContent.setOnClickListener { onButtonClicked.invoke(control) }
+                    conContent.setOnClickListener {
+                        if (!preventAction) onButtonClicked.invoke(control.id)
+                    }
                 }
             }
         }

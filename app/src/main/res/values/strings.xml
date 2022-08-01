@@ -26,10 +26,16 @@
     <string name="label_logout">Keluar</string>
     <string name="label_suhu">Suhu</string>
     <string name="label_kelembapan">Kelembapan</string>
-    <string name="label_download_laporan">Download Laporan</string>
+    <string name="label_view_image">Lihat Gambar</string>
     <string name="label_blower">Blower</string>
     <string name="label_lampu">Lampu</string>
     <string name="watering_duration">Durasi penyiraman</string>
     <string name="label_automatic">Otomatis</string>
     <string name="label_save">Simpan</string>
+    <string name="label_watering">Penyiraman Air</string>
+    <string name="label_age">Usia</string>
+    <string name="label_date">Tanggal</string>
+    <string name="label_set">Set</string>
+    <string name="label_cancel">Batal</string>
+    <string name="label_select_time">Pilih waktu</string>
 </resources>

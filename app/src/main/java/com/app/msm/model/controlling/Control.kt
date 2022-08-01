@@ -1,4 +1,4 @@
-package com.app.msm.model
+package com.app.msm.model.controlling
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes

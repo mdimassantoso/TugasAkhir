@@ -40,7 +40,6 @@
             android:lines="2"
             android:maxLines="2"
             android:text="@string/label_penyiraman_satu"
-
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/edtWateringOne"
             app:layout_constraintEnd_toStartOf="@id/edtWateringOne"
