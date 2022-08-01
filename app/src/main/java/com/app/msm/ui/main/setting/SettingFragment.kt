@@ -1,6 +1,7 @@
 package com.app.msm.ui.main.setting
 
 import android.os.Bundle
+import android.text.InputType
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -28,9 +29,21 @@ class SettingFragment : Fragment(R.layout.fragment_setting) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initView()
         initListener()
         initObserveResult()
         viewModel.listenToConfiguration()
+    }
+
+    private fun initView() = with(binding) {
+        edtWateringOne.inputType = InputType.TYPE_NULL
+        edtWateringTwo.inputType = InputType.TYPE_NULL
+        edtWateringThree.inputType = InputType.TYPE_NULL
+        edtWateringDuration.inputType = InputType.TYPE_NULL
+        edtTempUpperLimit.inputType = InputType.TYPE_NULL
+        edtTempLowerLimit.inputType = InputType.TYPE_NULL
+        edtHumUpperLimit.inputType = InputType.TYPE_NULL
+        edtHumLowerLimit.inputType = InputType.TYPE_NULL
     }
 
     private fun initObserveResult() {

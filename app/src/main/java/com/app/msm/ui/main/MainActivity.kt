@@ -3,6 +3,7 @@ package com.app.msm.ui.main
 import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.app.msm.R
@@ -20,15 +21,30 @@ class MainActivity : AppCompatActivity() {
         initNavController()
     }
 
-    private fun initNavController() = with(binding) {
+    private fun initNavController() {
         val navHost = supportFragmentManager.findFragmentById(R.id.fcvMain) as NavHostFragment
         val navHostController = navHost.navController
 
         navHostController.addOnDestinationChangedListener { _, destination, _ ->
-            tvAppTitle.text = destination.label
+            handleAppTitle(destination.label.toString())
+            handleBottomNavBarVisibility(destination.id)
         }
-        bnvMain.setupWithNavController(navHostController)
+        binding.bnvMain.setupWithNavController(navHostController)
     }
+
+    private fun handleAppTitle(label: String) {
+        binding.tvAppTitle.text = label
+    }
+
+    private fun handleBottomNavBarVisibility(fragmentId: Int) {
+        binding.bnvMain.isVisible = getMainFragments().contains(fragmentId)
+    }
+
+    private fun getMainFragments(): List<Int> = listOf(
+        R.id.monitoringFragment,
+        R.id.controllingFragment,
+        R.id.settingFragment
+    )
 
     companion object {
         fun start(context: Context, clearTask: Boolean = false) {

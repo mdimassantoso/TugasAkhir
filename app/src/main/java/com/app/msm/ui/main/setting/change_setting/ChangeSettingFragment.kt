@@ -83,6 +83,9 @@ class ChangeSettingFragment : Fragment(R.layout.fragment_change_setting) {
         btnSave.setOnClickListener {
             saveConfiguration()
         }
+        btnBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
         edtWateringOne.setOnClickListener {
             showTimePickerDialog(childFragmentManager) { time ->
                 edtWateringOne.setText(time)
