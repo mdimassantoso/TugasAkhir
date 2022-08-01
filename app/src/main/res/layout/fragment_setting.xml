@@ -24,7 +24,7 @@
             android:lines="2"
             android:maxLines="2"
             android:text="@string/label_jadwal_penyiraman"
-            
+
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
@@ -40,7 +40,7 @@
             android:lines="2"
             android:maxLines="2"
             android:text="@string/label_penyiraman_satu"
-            
+
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/edtWateringOne"
             app:layout_constraintEnd_toStartOf="@id/edtWateringOne"
@@ -80,8 +80,7 @@
             android:gravity="center_vertical"
             android:lines="2"
             android:maxLines="2"
-            android:text="@string/label_penyiraman_satu"
-            
+            android:text="@string/label_penyiraman_dua"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/edtWateringTwo"
             app:layout_constraintEnd_toStartOf="@id/edtWateringTwo"
@@ -120,8 +119,7 @@
             android:gravity="center_vertical"
             android:lines="2"
             android:maxLines="2"
-            android:text="@string/label_penyiraman_satu"
-            
+            android:text="@string/label_penyiraman_tiga"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/edtWateringThree"
             app:layout_constraintEnd_toStartOf="@id/edtWateringThree"
@@ -153,6 +151,45 @@
             app:constraint_referenced_ids="edtWateringThree, tvLabelWateringThree" />
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvLabelWateringDuration"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:lines="2"
+            android:maxLines="2"
+            android:text="@string/watering_duration"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/edtWateringDuration"
+            app:layout_constraintEnd_toStartOf="@id/edtWateringDuration"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintHorizontal_weight="0.3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/edtWateringDuration" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edtWateringDuration"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_edit_text"
+            android:inputType="none"
+            android:padding="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="0.7"
+            app:layout_constraintStart_toEndOf="@id/tvLabelWateringDuration"
+            app:layout_constraintTop_toBottomOf="@id/brWateringThree"
+            app:layout_constraintVertical_bias="0" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/brWateringDuration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="edtWateringDuration, tvLabelWateringDuration" />
+
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvLabelTempLimit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -162,12 +199,11 @@
             android:lines="2"
             android:maxLines="2"
             android:text="@string/label_batas_suhu"
-            
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/brWateringThree" />
+            app:layout_constraintTop_toBottomOf="@id/brWateringDuration" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvLabelTempUpperLimit"
@@ -178,7 +214,7 @@
             android:lines="2"
             android:maxLines="2"
             android:text="@string/label_batas_atas_suhu"
-            
+
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/edtTempUpperLimit"
             app:layout_constraintEnd_toStartOf="@id/edtTempUpperLimit"
@@ -209,7 +245,7 @@
             android:layout_height="wrap_content"
 
             android:text="@string/label_celcius"
-            
+
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/edtTempUpperLimit"
             app:layout_constraintEnd_toEndOf="parent"
@@ -231,7 +267,7 @@
             android:lines="2"
             android:maxLines="2"
             android:text="@string/label_batas_bawah_suhu"
-            
+
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/edtTempLowerLimit"
             app:layout_constraintEnd_toStartOf="@id/edtTempLowerLimit"
@@ -261,7 +297,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/label_celcius"
-            
+
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/edtTempLowerLimit"
             app:layout_constraintEnd_toEndOf="parent"
@@ -284,7 +320,7 @@
             android:lines="2"
             android:maxLines="2"
             android:text="@string/label_batas_kelembaban"
-            
+
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
@@ -300,7 +336,7 @@
             android:lines="2"
             android:maxLines="2"
             android:text="@string/label_batas_atas_kelembapan"
-            
+
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/edtHumUpperLimit"
             app:layout_constraintEnd_toStartOf="@id/edtHumUpperLimit"
@@ -330,7 +366,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/label_percent"
-            
+
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/edtHumUpperLimit"
             app:layout_constraintEnd_toEndOf="parent"
@@ -352,7 +388,6 @@
             android:lines="2"
             android:maxLines="2"
             android:text="@string/label_batas_bawah_kelembapan"
-            
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/edtHumLowerLimit"
             app:layout_constraintEnd_toStartOf="@id/edtHumLowerLimit"
@@ -382,7 +417,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/label_percent"
-            
+
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/edtHumLowerLimit"
             app:layout_constraintEnd_toEndOf="parent"
@@ -407,7 +442,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btnLogout"
             app:layout_constraintTop_toBottomOf="@id/brHumLowerLimit"
             app:layout_constraintVertical_bias="0" />
 
@@ -420,9 +455,13 @@
             android:background="@drawable/bg_edit_text"
             android:text="@string/label_logout"
             android:textSize="20sp"
-            app:layout_constraintTop_toBottomOf="@id/btnAction"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btnAction"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/brHumLowerLimit"
+            app:layout_constraintVertical_bias="0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

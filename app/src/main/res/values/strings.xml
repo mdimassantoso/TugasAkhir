@@ -11,6 +11,8 @@
     <string name="label_registrasi">Registrasi</string>
     <string name="label_jadwal_penyiraman">Jadwal Penyiraman</string>
     <string name="label_penyiraman_satu">Penyiraman 1</string>
+    <string name="label_penyiraman_dua">Penyiraman 2</string>
+    <string name="label_penyiraman_tiga">Penyiraman 3</string>
     <string name="label_batas_suhu">Batas Suhu</string>
     <string name="label_batas_atas_suhu">Batas Atas Suhu</string>
     <string name="label_celcius">C</string>
@@ -26,4 +28,6 @@
     <string name="label_download_laporan">Download Laporan</string>
     <string name="label_blower">Blower</string>
     <string name="label_lampu">Lampu</string>
+    <string name="watering_duration">Durasi penyiraman</string>
+    <string name="label_automatic">Otomatis</string>
 </resources>
