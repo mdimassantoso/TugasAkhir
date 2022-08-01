@@ -9,6 +9,16 @@
         android:id="@+id/settingFragment"
         android:name="com.app.msm.ui.main.setting.SettingFragment"
         android:label="@string/label_setting"
-        tools:layout="@layout/fragment_setting" />
+        tools:layout="@layout/fragment_setting">
+        <action
+            android:id="@+id/toUpdateSetting"
+            app:destination="@id/changeSettingFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/changeSettingFragment"
+        android:name="com.app.msm.ui.main.setting.change_setting.ChangeSettingFragment"
+        android:label="@string/label_change_setting"
+        tools:layout="@layout/fragment_change_setting" />
 
 </navigation>

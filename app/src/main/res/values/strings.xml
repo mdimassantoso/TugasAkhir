@@ -2,7 +2,8 @@
     <string name="app_name">msm</string>
     <string name="label_monitoring">Monitoring</string>
     <string name="label_controlling">Controlling</string>
-    <string name="label_setting">Setting</string>
+    <string name="label_setting">Pengaturan</string>
+    <string name="label_change_setting">Ubah Pengaturan</string>
     <string name="label_login">Login</string>
     <string name="label_mushroom_growers">Mushroom Growers</string>
     <string name="label_email">Email</string>
@@ -30,4 +31,5 @@
     <string name="label_lampu">Lampu</string>
     <string name="watering_duration">Durasi penyiraman</string>
     <string name="label_automatic">Otomatis</string>
+    <string name="label_save">Simpan</string>
 </resources>
