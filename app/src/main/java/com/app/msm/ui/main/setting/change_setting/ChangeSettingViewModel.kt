@@ -15,18 +15,23 @@ class ChangeSettingViewModel : ViewModel() {
     val configurationViewState = _configurationViewState.receiveAsFlow()
 
     private val configurationReference: DatabaseReference by lazy { FirebaseProvider.configurationReference }
+    private val autoConfigurationReference: DatabaseReference by lazy { FirebaseProvider.autoConfigReference }
 
     fun updateConfiguration(configuration: Configuration) {
         with(_configurationViewState) {
             trySend(ViewState.Loading)
             configurationReference
                 .setValue(configuration.toConfigurationRequest())
-                .addOnSuccessListener { trySend(ViewState.Success(configuration)) }
                 .addOnCanceledListener { trySend(ViewState.Error(CancellationException())) }
-                .addOnFailureListener { exception ->
-                    trySend(ViewState.Error(exception))
+                .addOnFailureListener { exception -> trySend(ViewState.Error(exception)) }
+                .addOnSuccessListener {
+                    enableAutoConfiguration()
+                    trySend(ViewState.Success(configuration))
                 }
         }
     }
 
+    private fun enableAutoConfiguration() {
+        autoConfigurationReference.setValue(1)
+    }
 }

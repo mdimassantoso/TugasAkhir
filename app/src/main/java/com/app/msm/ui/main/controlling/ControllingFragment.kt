@@ -2,6 +2,7 @@ package com.app.msm.ui.main.controlling
 
 import android.os.Bundle
 import android.view.View
+import android.widget.CompoundButton
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -12,12 +13,14 @@ import com.app.msm.R
 import com.app.msm.data.api.FirebaseProvider
 import com.app.msm.databinding.FragmentControllingBinding
 import com.app.msm.extension.showSnackBar
+import com.app.msm.helper.Helper
 import com.app.msm.helper.viewBinding
 import com.app.msm.model.controlling.Control
+import com.app.msm.ui.preview_image.PreviewImageDialog
 import com.app.msm.vo.ViewState
 import kotlinx.coroutines.launch
 
-class ControllingFragment : Fragment(R.layout.fragment_controlling) {
+class ControllingFragment : Fragment(R.layout.fragment_controlling), CompoundButton.OnCheckedChangeListener {
 
     private val binding by viewBinding(FragmentControllingBinding::bind)
 
@@ -26,7 +29,8 @@ class ControllingFragment : Fragment(R.layout.fragment_controlling) {
     private val controllingAdapter by lazy {
         ControllingAdapter(
             onSwitchChecked = { id, isChecked -> onSwitchChanged(id, isChecked) },
-            onButtonClicked = { id -> onControllingChanged(id) }
+            onButtonClicked = { id -> onControllingChanged(id) },
+            onAutoConfigEnabled = { binding.root.showSnackBar("Tidak dapat mengubah, otomatis sedang dinyalakan") }
         )
     }
 
@@ -42,9 +46,22 @@ class ControllingFragment : Fragment(R.layout.fragment_controlling) {
 
     private fun onControllingChanged(id: Int) {
         when (id) {
-            R.string.label_view_image -> Unit // TODO get url & show image preview dialog
+            R.string.label_view_image -> showImagePreview()
             else -> return
         }
+    }
+
+    private fun showImagePreview() {
+        viewModel.getCameraImageUrl(
+            onSuccess = { url ->
+                PreviewImageDialog.newInstance(url).also { dialog ->
+                    dialog.show(childFragmentManager, PreviewImageDialog.TAG)
+                }
+            },
+            onError = { throwable ->
+                binding.root.showSnackBar(throwable.message.orEmpty())
+            }
+        )
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -61,8 +78,33 @@ class ControllingFragment : Fragment(R.layout.fragment_controlling) {
     }
 
     private fun initListener() = with(binding) {
-        swAutomatic.setOnCheckedChangeListener { _, isChecked ->
-            viewModel.updateAutomaticConfiguration(isChecked)
+        swAutomatic.setOnCheckedChangeListener(this@ControllingFragment)
+    }
+
+    private fun onAutoConfigurationCheckedListener(isChecked: Boolean) {
+        viewModel.getConfiguration(
+            onSuccess = { configuration ->
+                if (configuration.isNotConfiguredYet()) {
+                    setAutoConfigSwitch(isChecked.not())
+                    Helper.showAlertDialog(
+                        context = requireContext(),
+                        title = "Warning",
+                        message = "Tidak dapat mengaktifkan, Konfigurasi belum di set",
+                        positiveButtonText = "OK"
+                    )
+                } else {
+                    viewModel.updateAutomaticConfiguration(isChecked)
+                }
+            },
+            onError = { setAutoConfigSwitch(isChecked.not()) }
+        )
+    }
+
+    private fun setAutoConfigSwitch(checked: Boolean) {
+        binding.swAutomatic.apply {
+            setOnCheckedChangeListener(null)
+            isChecked = checked
+            setOnCheckedChangeListener(this@ControllingFragment)
         }
     }
 
@@ -109,6 +151,7 @@ class ControllingFragment : Fragment(R.layout.fragment_controlling) {
             }
             is ViewState.Success -> {
                 val message = if (actionState.data) "Berhasil mengaktifkan" else "Berhasil mematikan"
+
                 root.showSnackBar(message)
             }
         }
@@ -121,19 +164,23 @@ class ControllingFragment : Fragment(R.layout.fragment_controlling) {
             is ViewState.Error -> {
                 root.showSnackBar(viewState.e.message.orEmpty())
             }
-            is ViewState.Success -> swAutomatic.isChecked = viewState.data
+            is ViewState.Success -> {
+                controllingAdapter.isAutoConfigEnable = viewState.data
+                setAutoConfigSwitch(viewState.data)
+            }
         }
     }
 
     private fun handleControllingActionState(actionState: ViewState<Boolean>) = with(binding) {
-        controllingAdapter.preventAction = actionState is ViewState.Loading
+        controllingAdapter.isDisableAction = actionState is ViewState.Loading
         when (actionState) {
             is ViewState.Loading -> Unit
             is ViewState.Error -> {
                 root.showSnackBar(actionState.e.message.orEmpty())
             }
             is ViewState.Success -> {
-                val message = if (actionState.data) "Berhasil mengaktifkan" else "Berhasil mematikan"
+                val message =
+                    if (actionState.data) "Berhasil mengaktifkan" else "Berhasil mematikan"
                 root.showSnackBar(message)
             }
         }
@@ -165,5 +212,9 @@ class ControllingFragment : Fragment(R.layout.fragment_controlling) {
             adapter = controllingAdapter
             itemAnimator = null
         }
+    }
+
+    override fun onCheckedChanged(switch: CompoundButton, isChecked: Boolean) {
+        onAutoConfigurationCheckedListener(isChecked)
     }
 }

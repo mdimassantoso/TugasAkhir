@@ -15,6 +15,16 @@ data class Configuration(
     val temperatureUpperLimit: Int,
     val temperatureLowerLimit: Int
 ) : Parcelable {
+
+    fun isNotConfiguredYet(): Boolean = firstWateringSchedule.isEmpty() or
+        secondWateringSchedule.isEmpty() or
+        thirdWateringSchedule.isEmpty() or
+        (wateringDuration == 0) or
+        (temperatureUpperLimit == 0) or
+        (temperatureLowerLimit == 0) or
+        (humidityUpperLimit == 0) or
+        (humidityLowerLimit == 0)
+
     fun toConfigurationRequest(): ConfigurationRequest = ConfigurationRequest(
         firstWateringSchedule = firstWateringSchedule,
         secondWateringSchedule = secondWateringSchedule,

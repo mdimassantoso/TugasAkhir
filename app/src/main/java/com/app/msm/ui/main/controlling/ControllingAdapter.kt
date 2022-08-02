@@ -1,6 +1,7 @@
 package com.app.msm.ui.main.controlling
 
 import android.view.ViewGroup
+import android.widget.CompoundButton
 import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -12,7 +13,9 @@ import com.app.msm.model.controlling.Control
 class ControllingAdapter(
     private val onSwitchChecked: (id: Int, isChecked: Boolean) -> Unit,
     private val onButtonClicked: (id: Int) -> Unit,
-    var preventAction: Boolean = false
+    private val onAutoConfigEnabled: () -> Unit,
+    var isDisableAction: Boolean = false,
+    var isAutoConfigEnable: Boolean = false
 ) : ListAdapter<Control, RecyclerView.ViewHolder>(DIFF_UTIL) {
 
     override fun onCreateViewHolder(
@@ -44,19 +47,36 @@ class ControllingAdapter(
                 is ControlType.Switch -> {
                     swControl.isChecked = controlType.isChecked
                     swControl.setOnCheckedChangeListener { switch, isChecked ->
-                        if (!preventAction) {
-                            onSwitchChecked.invoke(control.id, isChecked)
-                        } else {
-                            switch.isChecked = isChecked.not()
-                        }
+                        handleOnCheckedListener(control, switch, isChecked)
                     }
                 }
                 is ControlType.Button -> {
                     conContent.setOnClickListener {
-                        if (!preventAction) onButtonClicked.invoke(control.id)
+                        handleOnClickListener(control)
                     }
                 }
             }
+        }
+    }
+
+    private fun handleOnClickListener(control: Control) {
+        if (!isDisableAction) {
+            onButtonClicked.invoke(control.id)
+        }
+    }
+
+    private fun handleOnCheckedListener(
+        control: Control,
+        switch: CompoundButton,
+        isChecked: Boolean
+    ) {
+        if (!isDisableAction && !isAutoConfigEnable) {
+            onSwitchChecked.invoke(control.id, isChecked)
+            return
+        }
+        switch.isChecked = isChecked.not()
+        if (isAutoConfigEnable) {
+            onAutoConfigEnabled.invoke()
         }
     }
 
@@ -66,6 +86,7 @@ class ControllingAdapter(
                 oldItem: Control,
                 newItem: Control
             ): Boolean = oldItem.id == newItem.id
+
             override fun areContentsTheSame(
                 oldItem: Control,
                 newItem: Control

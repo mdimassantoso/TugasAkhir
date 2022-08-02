@@ -24,6 +24,7 @@
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.20677083333333332" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25146484375" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.20677083333333332" />
+        <entry key="app/src/main/res/layout/dialog_image_preview.xml" value="0.236627197265625" />
         <entry key="app/src/main/res/layout/fragment_change_setting.xml" value="0.2078125" />
         <entry key="app/src/main/res/layout/fragment_controlling.xml" value="0.24292500813802081" />
         <entry key="app/src/main/res/layout/fragment_monitoring.xml" value="0.20677083333333332" />

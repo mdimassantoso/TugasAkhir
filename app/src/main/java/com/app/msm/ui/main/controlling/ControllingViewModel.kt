@@ -2,9 +2,11 @@ package com.app.msm.ui.main.controlling
 
 import androidx.lifecycle.ViewModel
 import com.app.msm.data.api.FirebaseProvider
+import com.app.msm.data.api.response.configuration.ConfigurationResponse
 import com.app.msm.data.api.response.controlling.ControllingResponse
 import com.app.msm.extension.toBoolean
 import com.app.msm.extension.toInt
+import com.app.msm.model.configuration.Configuration
 import com.app.msm.model.controlling.Control
 import com.app.msm.vo.ViewState
 import com.google.firebase.database.DataSnapshot
@@ -31,6 +33,59 @@ class ControllingViewModel : ViewModel() {
 
     private val controllingReference: DatabaseReference by lazy { FirebaseProvider.controllingReference }
     private val autoConfigReference: DatabaseReference by lazy { FirebaseProvider.autoConfigReference }
+    private val imageCameraReference: DatabaseReference by lazy { FirebaseProvider.cameraSensorUrlReference }
+    private val configurationReference: DatabaseReference by lazy { FirebaseProvider.configurationReference }
+
+    /*
+        Configuration
+     */
+
+    fun getConfiguration(
+        onSuccess: (Configuration) -> Unit,
+        onError: (Throwable) -> Unit
+    ) {
+        val task = configurationReference.get()
+        if (task.isSuccessful) {
+            try {
+                task.result.getValue(ConfigurationResponse::class.java)?.toConfiguration()?.run {
+                    onSuccess.invoke(this)
+                }
+            } catch (e: Exception) {
+                onError.invoke(e)
+            }
+            return
+        }
+        if (task.isCanceled) {
+            onError.invoke(CancellationException("cancelled"))
+            return
+        }
+        task.exception?.let(onError::invoke)
+    }
+
+    /*
+        Camera Image URL
+     */
+
+    fun getCameraImageUrl(
+        onSuccess: (String) -> Unit,
+        onError: (Throwable) -> Unit
+    ) {
+        val task = imageCameraReference.get()
+        if (task.isSuccessful) {
+            try {
+                val imageUrl = task.result.getValue(String::class.java).orEmpty()
+                onSuccess.invoke(imageUrl)
+            } catch (e: Exception) {
+                onError.invoke(e)
+            }
+            return
+        }
+        if (task.isCanceled) {
+            onError.invoke(CancellationException())
+            return
+        }
+        task.exception?.let(onError::invoke)
+    }
 
     /*
         Controlling - Action
