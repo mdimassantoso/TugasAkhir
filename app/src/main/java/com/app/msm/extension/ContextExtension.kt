@@ -2,8 +2,8 @@ package com.app.msm.extension
 
 import android.content.Context
 import android.content.Intent
-import android.view.View
-import com.google.android.material.snackbar.Snackbar
+import android.content.res.Configuration
+import com.app.msm.helper.Helper
 
 fun <T> Context.openActivity(
     destination: Class<T>,
@@ -16,4 +16,10 @@ fun <T> Context.openActivity(
     if (clearTask) intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
     if (singleTop) intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
     startActivity(intent)
+}
+
+fun Context.isUsingNightMode(): Boolean = if (Helper.isAndroidROrHigher()) {
+    resources.configuration.isNightModeActive
+} else {
+    resources.configuration.uiMode == Configuration.UI_MODE_NIGHT_YES
 }

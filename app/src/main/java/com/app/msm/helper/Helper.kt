@@ -14,6 +14,7 @@ import com.google.android.material.timepicker.TimeFormat
 object Helper {
     fun isDebugBuild(): Boolean = BuildConfig.DEBUG
     fun isAndroidQ(): Boolean = Build.VERSION.SDK_INT == Build.VERSION_CODES.Q
+    fun isAndroidROrHigher(): Boolean = Build.VERSION.SDK_INT >= Build.VERSION_CODES.R
 
     fun showTimePickerDialog(
         fragmentManager: FragmentManager,
