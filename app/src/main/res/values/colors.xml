@@ -13,4 +13,8 @@
     <color name="transparent">#00000000</color>
     <color name="bg_teal">@color/teal_200</color>
     <color name="main_svg_icon_tint">@color/black</color>
+    <color name="grey">#717070</color>
+    <color name="dark_blue">#005FBF</color>
+    <color name="red">#FF0000</color>
+    <color name="white_smoke">#CDCDCD</color>
 </resources>

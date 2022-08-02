@@ -32,6 +32,7 @@
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/swAutomatic"
+        style="@style/CustomSwitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"

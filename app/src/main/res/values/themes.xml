@@ -32,4 +32,9 @@
         <item name="android:windowCloseOnTouchOutside">false</item>
     </style>
 
+    <style name="CustomSwitch" parent="Widget.AppCompat.CompoundButton.Switch">
+        <item name="android:thumb">@drawable/switch_button_thumb</item>
+        <item name="track">@drawable/switch_button_track</item>
+    </style>
+
 </resources>

@@ -21,6 +21,8 @@
         <entry key="app/src/main/res/drawable/selector_bottom_nav_color_state.xml" value="0.214" />
         <entry key="app/src/main/res/drawable/selector_edit_text_background.xml" value="0.234" />
         <entry key="app/src/main/res/drawable/selector_edit_text_hint_color.xml" value="0.234" />
+        <entry key="app/src/main/res/drawable/switchbutton_thumb.xml" value="0.1215" />
+        <entry key="app/src/main/res/drawable/switchbutton_track.xml" value="0.1215" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.20677083333333332" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25146484375" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.20677083333333332" />
