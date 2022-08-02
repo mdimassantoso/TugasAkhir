@@ -21,5 +21,5 @@ fun <T> Context.openActivity(
 fun Context.isUsingNightMode(): Boolean = if (Helper.isAndroidROrHigher()) {
     resources.configuration.isNightModeActive
 } else {
-    resources.configuration.uiMode == Configuration.UI_MODE_NIGHT_YES
+    resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
 }
