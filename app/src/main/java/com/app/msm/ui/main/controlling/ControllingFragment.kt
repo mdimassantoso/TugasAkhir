@@ -20,7 +20,9 @@ import com.app.msm.ui.preview_image.PreviewImageDialog
 import com.app.msm.vo.ViewState
 import kotlinx.coroutines.launch
 
-class ControllingFragment : Fragment(R.layout.fragment_controlling), CompoundButton.OnCheckedChangeListener {
+class ControllingFragment :
+    Fragment(R.layout.fragment_controlling),
+    CompoundButton.OnCheckedChangeListener {
 
     private val binding by viewBinding(FragmentControllingBinding::bind)
 
@@ -30,7 +32,16 @@ class ControllingFragment : Fragment(R.layout.fragment_controlling), CompoundBut
         ControllingAdapter(
             onSwitchChecked = { id, isChecked -> onSwitchChanged(id, isChecked) },
             onButtonClicked = { id -> onControllingChanged(id) },
-            onAutoConfigEnabled = { binding.root.showSnackBar("Tidak dapat mengubah, otomatis sedang dinyalakan") }
+            onAutoConfigEnabled = {
+                context?.let { context ->
+                    Helper.showAlertDialog(
+                        context = context,
+                        title = context.getString(R.string.label_warning),
+                        message = context.getString(R.string.label_cannot_be_changed_auto_config_turned_on),
+                        positiveButtonText = context.getString(R.string.label_ok)
+                    )
+                }
+            }
         )
     }
 
@@ -78,7 +89,7 @@ class ControllingFragment : Fragment(R.layout.fragment_controlling), CompoundBut
     }
 
     private fun initListener() = with(binding) {
-        swAutomatic.setOnCheckedChangeListener(this@ControllingFragment)
+        // swAutomatic.setOnCheckedChangeListener(this@ControllingFragment)
     }
 
     private fun onAutoConfigurationCheckedListener(isChecked: Boolean) {
@@ -86,12 +97,14 @@ class ControllingFragment : Fragment(R.layout.fragment_controlling), CompoundBut
             onSuccess = { configuration ->
                 if (configuration.isNotConfiguredYet()) {
                     setAutoConfigSwitch(isChecked.not())
-                    Helper.showAlertDialog(
-                        context = requireContext(),
-                        title = "Warning",
-                        message = "Tidak dapat mengaktifkan, Konfigurasi belum di set",
-                        positiveButtonText = "OK"
-                    )
+                    context?.let { context ->
+                        Helper.showAlertDialog(
+                            context = context,
+                            title = context.getString(R.string.label_warning),
+                            message = context.getString(R.string.label_cannot_activate_before_config_set),
+                            positiveButtonText = context.getString(R.string.label_ok)
+                        )
+                    }
                 } else {
                     viewModel.updateAutomaticConfiguration(isChecked)
                 }
@@ -150,8 +163,11 @@ class ControllingFragment : Fragment(R.layout.fragment_controlling), CompoundBut
                 root.showSnackBar(actionState.e.message.orEmpty())
             }
             is ViewState.Success -> {
-                val message = if (actionState.data) "Berhasil mengaktifkan" else "Berhasil mematikan"
-
+                val message = if (actionState.data) {
+                    R.string.label_turn_on_successfully
+                } else {
+                    R.string.label_turn_off_successfully
+                }
                 root.showSnackBar(message)
             }
         }
@@ -179,14 +195,18 @@ class ControllingFragment : Fragment(R.layout.fragment_controlling), CompoundBut
                 root.showSnackBar(actionState.e.message.orEmpty())
             }
             is ViewState.Success -> {
-                val message =
-                    if (actionState.data) "Berhasil mengaktifkan" else "Berhasil mematikan"
+                val message = if (actionState.data) {
+                    R.string.label_turn_on_successfully
+                } else {
+                    R.string.label_turn_off_successfully
+                }
                 root.showSnackBar(message)
             }
         }
     }
 
     private fun handleControllingViewState(viewState: ViewState<List<Control>>) {
+        controllingAdapter.isDisableAction = viewState is ViewState.Loading
         when (viewState) {
             is ViewState.Loading -> Unit
             is ViewState.Error -> {

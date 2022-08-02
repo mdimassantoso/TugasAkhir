@@ -38,4 +38,11 @@
     <string name="label_set">Set</string>
     <string name="label_cancel">Batal</string>
     <string name="label_select_time">Pilih waktu</string>
+    <string name="label_warning">Peringatan</string>
+    <string name="label_ok">OK</string>
+    <string name="label_cannot_activate_before_config_set">Tidak dapat mengaktifkan, Konfigurasi belum di set</string>
+    <string name="label_cannot_be_changed_auto_config_turned_on">Tidak dapat mengubah, otomatis sedang dinyalakan</string>
+    <string name="label_turn_on_successfully">Berhasil mengaktifkan</string>
+    <string name="label_turn_off_successfully">Berhasil mematikan</string>
+    <string name="label_configuration_changed_successfully">Berhasil mengubah konfigurasi</string>
 </resources>

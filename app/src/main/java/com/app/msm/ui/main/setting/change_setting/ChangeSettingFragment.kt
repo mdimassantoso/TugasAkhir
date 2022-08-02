@@ -60,7 +60,7 @@ class ChangeSettingFragment : Fragment(R.layout.fragment_change_setting) {
                 root.showSnackBar(actionState.e.message.orEmpty())
             }
             is ViewState.Success -> {
-                root.showSnackBar("Berhasil mengubah konfigurasi")
+                root.showSnackBar(R.string.label_configuration_changed_successfully)
                 findNavController().navigateUp()
             }
         }

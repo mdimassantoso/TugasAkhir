@@ -44,22 +44,20 @@ class ControllingViewModel : ViewModel() {
         onSuccess: (Configuration) -> Unit,
         onError: (Throwable) -> Unit
     ) {
-        val task = configurationReference.get()
-        if (task.isSuccessful) {
-            try {
-                task.result.getValue(ConfigurationResponse::class.java)?.toConfiguration()?.run {
-                    onSuccess.invoke(this)
+        configurationReference.get()
+            .addOnFailureListener { exception ->
+                onError.invoke(exception)
+            }.addOnCanceledListener {
+                onError.invoke(CancellationException("Cancelled"))
+            }.addOnSuccessListener { snapshot ->
+                try {
+                    snapshot.getValue(ConfigurationResponse::class.java)?.toConfiguration()?.run {
+                        onSuccess.invoke(this)
+                    }
+                } catch (e: Exception) {
+                    onError.invoke(e)
                 }
-            } catch (e: Exception) {
-                onError.invoke(e)
             }
-            return
-        }
-        if (task.isCanceled) {
-            onError.invoke(CancellationException("cancelled"))
-            return
-        }
-        task.exception?.let(onError::invoke)
     }
 
     /*
@@ -70,21 +68,19 @@ class ControllingViewModel : ViewModel() {
         onSuccess: (String) -> Unit,
         onError: (Throwable) -> Unit
     ) {
-        val task = imageCameraReference.get()
-        if (task.isSuccessful) {
-            try {
-                val imageUrl = task.result.getValue(String::class.java).orEmpty()
-                onSuccess.invoke(imageUrl)
-            } catch (e: Exception) {
-                onError.invoke(e)
+        imageCameraReference.get()
+            .addOnCanceledListener {
+                onError.invoke(CancellationException("Cancelled"))
+            }.addOnFailureListener { exception ->
+                onError.invoke(exception)
+            }.addOnSuccessListener { snapshot ->
+                try {
+                    val imageUrl = snapshot.getValue(String::class.java).orEmpty()
+                    onSuccess.invoke(imageUrl)
+                } catch (e: Exception) {
+                    onError.invoke(e)
+                }
             }
-            return
-        }
-        if (task.isCanceled) {
-            onError.invoke(CancellationException())
-            return
-        }
-        task.exception?.let(onError::invoke)
     }
 
     /*
@@ -94,8 +90,7 @@ class ControllingViewModel : ViewModel() {
     fun updateControllingData(databaseReference: DatabaseReference, turnOn: Boolean) {
         with(_controllingActionState) {
             trySend(ViewState.Loading)
-            databaseReference
-                .setValue(turnOn.toInt())
+            databaseReference.setValue(turnOn.toInt())
                 .addOnSuccessListener { trySend(ViewState.Success(turnOn)) }
                 .addOnCanceledListener { trySend(ViewState.Error(CancellationException())) }
                 .addOnFailureListener { exception ->
