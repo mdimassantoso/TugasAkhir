@@ -35,6 +35,15 @@
     <style name="CustomSwitch" parent="Widget.AppCompat.CompoundButton.Switch">
         <item name="android:thumb">@drawable/switch_button_thumb</item>
         <item name="track">@drawable/switch_button_track</item>
+        <item name="showText">true</item>
+        <item name="android:textOn">@string/label_on</item>
+        <item name="android:textOff">@string/label_off</item>
+        <item name="switchTextAppearance">@style/CustomSwitch.TextAppearance</item>
+    </style>
+
+    <style name="CustomSwitch.TextAppearance" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
 </resources>

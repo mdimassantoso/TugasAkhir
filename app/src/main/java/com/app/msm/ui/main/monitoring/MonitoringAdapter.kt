@@ -13,6 +13,7 @@ import com.app.msm.extension.orZero
 import com.app.msm.helper.HexColor
 import com.app.msm.model.monitoring.Monitor
 import com.ekn.gruzer.gaugelibrary.Range
+import kotlin.math.roundToInt
 
 class MonitoringAdapter : ListAdapter<Monitor, RecyclerView.ViewHolder>(DIFF_UTIL) {
 
@@ -20,7 +21,7 @@ class MonitoringAdapter : ListAdapter<Monitor, RecyclerView.ViewHolder>(DIFF_UTI
         parent: ViewGroup,
         viewType: Int
     ): RecyclerView.ViewHolder = when (viewType) {
-        Monitor.VIEW_TYPE_GAUGE -> GaugeViewHolder(
+        Monitor.ViewType.Gauge.VIEW_TYPE -> GaugeViewHolder(
             parent.inflateBinding(ItemMonitoringGaugeBinding::inflate)
         )
         else -> MonitorViewHolder(
@@ -32,13 +33,27 @@ class MonitoringAdapter : ListAdapter<Monitor, RecyclerView.ViewHolder>(DIFF_UTI
         holder: RecyclerView.ViewHolder,
         position: Int
     ) {
-        when (holder) {
-            is GaugeViewHolder -> getItem(position)?.let(holder::bind)
-            is MonitorViewHolder -> getItem(position)?.let(holder::bind)
+        val item = getItem(position) ?: return
+        when (item.viewType) {
+            is Monitor.ViewType.Default -> {
+                (holder as MonitorViewHolder).bind(item)
+            }
+            is Monitor.ViewType.DefaultSeparatedUnitMeasurement -> {
+                (holder as MonitorViewHolder).bindSeparatedMeasurement(item)
+            }
+            is Monitor.ViewType.Gauge -> {
+                (holder as GaugeViewHolder).bind(item)
+            }
         }
     }
 
-    override fun getItemViewType(position: Int): Int = getItem(position).type.view
+    override fun getItemViewType(position: Int): Int = getItem(position)?.let { item ->
+        when (item.viewType) {
+            is Monitor.ViewType.Default -> Monitor.ViewType.Default.VIEW_TYPE
+            is Monitor.ViewType.DefaultSeparatedUnitMeasurement -> Monitor.ViewType.DefaultSeparatedUnitMeasurement.VIEW_TYPE
+            is Monitor.ViewType.Gauge -> Monitor.ViewType.Gauge.VIEW_TYPE
+        }
+    } ?: Monitor.ViewType.Default.VIEW_TYPE
 
     private inner class MonitorViewHolder(
         private val binding: ItemMonitoringBinding
@@ -46,7 +61,17 @@ class MonitoringAdapter : ListAdapter<Monitor, RecyclerView.ViewHolder>(DIFF_UTI
 
         fun bind(monitor: Monitor) = with(binding) {
             tvLabel.text = root.context.getString(monitor.label)
+            val value = StringBuilder().apply {
+                append(monitor.value)
+                append(getUnitMeasurement(monitor.unitMeasurement))
+            }.toString()
+            tvValue.text = value
+        }
+
+        fun bindSeparatedMeasurement(monitor: Monitor) = with(binding) {
+            tvLabel.text = root.context.getString(monitor.label)
             tvValue.text = monitor.value
+            tvUnitMeasurement.text = getUnitMeasurement(monitor.unitMeasurement)
         }
     }
 
@@ -60,8 +85,8 @@ class MonitoringAdapter : ListAdapter<Monitor, RecyclerView.ViewHolder>(DIFF_UTI
         }
 
         private fun initGauge(monitor: Monitor) = with(binding) {
-            val (firstRange, secondRange, thirdRange) = when (monitor.type.data) {
-                Monitor.DATA_TYPE_TEMP -> Triple(
+            val (firstRange, secondRange, thirdRange) = when (monitor.dataType) {
+                is Monitor.DataType.Temperature -> Triple(
                     Range().apply {
                         color = Color.parseColor(HexColor.DARK_BLUE)
                         from = 0.0
@@ -78,7 +103,7 @@ class MonitoringAdapter : ListAdapter<Monitor, RecyclerView.ViewHolder>(DIFF_UTI
                         to = 62.0
                     }
                 )
-                Monitor.DATA_TYPE_HUMIDITY -> Triple(
+                is Monitor.DataType.Humidity -> Triple(
                     Range().apply {
                         color = Color.parseColor(HexColor.BROWN)
                         from = 0.0
@@ -102,7 +127,9 @@ class MonitoringAdapter : ListAdapter<Monitor, RecyclerView.ViewHolder>(DIFF_UTI
             } else {
                 Color.BLACK
             }
+            val unitValueMeasurement = getUnitMeasurement(monitor.unitMeasurement)
             gauge.apply {
+                setFormatter { value -> "${value.roundToInt()}$unitValueMeasurement" }
                 addRange(firstRange)
                 addRange(secondRange)
                 addRange(thirdRange)
@@ -116,12 +143,22 @@ class MonitoringAdapter : ListAdapter<Monitor, RecyclerView.ViewHolder>(DIFF_UTI
         }
     }
 
+    private fun getUnitMeasurement(
+        measurement: Monitor.UnitMeasurement
+    ): String = when (measurement) {
+        is Monitor.UnitMeasurement.Celcius -> "C"
+        is Monitor.UnitMeasurement.Percent -> "%"
+        is Monitor.UnitMeasurement.Day -> "Hari"
+        is Monitor.UnitMeasurement.NoMeasurement -> null
+    }.orEmpty()
+
     companion object {
         private val DIFF_UTIL = object : DiffUtil.ItemCallback<Monitor>() {
             override fun areItemsTheSame(
                 oldItem: Monitor,
                 newItem: Monitor
             ): Boolean = oldItem.id == newItem.id
+
             override fun areContentsTheSame(
                 oldItem: Monitor,
                 newItem: Monitor

@@ -15,6 +15,7 @@ object FirebaseProvider {
         const val WATERING_CONTROL = "$CONTROLLING/penyiraman_air"
         const val LAMP_CONTROL = "$CONTROLLING/lampu"
         const val BLOWER_CONTROL = "$CONTROLLING/blower"
+        const val AGE = "$MONITORING/age"
     }
 
     val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
@@ -50,5 +51,9 @@ object FirebaseProvider {
 
     val blowerControlReference: DatabaseReference by lazy {
         firebaseDatabase.getReference(Path.BLOWER_CONTROL)
+    }
+
+    val ageReference: DatabaseReference by lazy {
+        firebaseDatabase.getReference(Path.AGE)
     }
 }

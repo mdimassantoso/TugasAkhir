@@ -1,7 +1,6 @@
 package com.app.msm.data.api.response.monitoring
 
 import com.app.msm.R
-import com.app.msm.extension.orDash
 import com.app.msm.extension.orZero
 import com.app.msm.model.monitoring.Monitor
 import com.google.firebase.database.PropertyName
@@ -27,34 +26,30 @@ data class MonitoringResponse(
         val temperature = Monitor(
             label = R.string.label_suhu,
             value = this.temperature.toString(),
-            type = Monitor.ViewType(
-                view = Monitor.VIEW_TYPE_GAUGE,
-                data = Monitor.DATA_TYPE_TEMP
-            )
+            viewType = Monitor.ViewType.Gauge,
+            dataType = Monitor.DataType.Temperature,
+            unitMeasurement = Monitor.UnitMeasurement.Celcius
         )
         val humidity = Monitor(
             label = R.string.label_kelembapan,
             value = this.humidity.toString(),
-            type = Monitor.ViewType(
-                view = Monitor.VIEW_TYPE_GAUGE,
-                data = Monitor.DATA_TYPE_HUMIDITY
-            )
+            viewType = Monitor.ViewType.Gauge,
+            dataType = Monitor.DataType.Humidity,
+            unitMeasurement = Monitor.UnitMeasurement.Percent
         )
         val age = Monitor(
             label = R.string.label_age,
-            value = "${age.orZero()} Hari",
-            type = Monitor.ViewType(
-                view = Monitor.VIEW_TYPE_DEFAULT,
-                data = Monitor.DATA_TYPE_PLAIN_TEXT
-            )
+            value = this.age.orZero().toString(),
+            viewType = Monitor.ViewType.DefaultSeparatedUnitMeasurement,
+            dataType = Monitor.DataType.PlainText,
+            unitMeasurement = Monitor.UnitMeasurement.Day
         )
         val currentDate = Monitor(
             label = R.string.label_date,
             value = LocalDate.now().format(DateTimeFormatter.ofPattern(Monitor.DATE_PATTERN)),
-            type = Monitor.ViewType(
-                view = Monitor.VIEW_TYPE_DEFAULT,
-                data = Monitor.DATA_TYPE_PLAIN_TEXT
-            )
+            viewType = Monitor.ViewType.Default,
+            dataType = Monitor.DataType.PlainText,
+            unitMeasurement = Monitor.UnitMeasurement.NoMeasurement
         )
         return listOf(temperature, humidity, age, currentDate)
     }

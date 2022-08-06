@@ -45,4 +45,8 @@
     <string name="label_turn_on_successfully">Berhasil mengaktifkan</string>
     <string name="label_turn_off_successfully">Berhasil mematikan</string>
     <string name="label_configuration_changed_successfully">Berhasil mengubah konfigurasi</string>
+    <string name="label_on">ON</string>
+    <string name="label_off">OFF</string>
+    <string name="label_second">Detik</string>
+    <string name="label_age_reset">Reset usia</string>
 </resources>

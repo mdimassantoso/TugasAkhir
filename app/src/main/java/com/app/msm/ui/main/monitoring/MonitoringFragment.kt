@@ -29,6 +29,18 @@ class MonitoringFragment : Fragment(R.layout.fragment_monitoring) {
         initRecyclerView()
         initObserveResult()
         viewModel.listenToMonitoring()
+        initListener()
+    }
+
+    private fun initListener() = with(binding) {
+        btnAgeReset.setOnClickListener {
+            viewModel.resetAge(
+                onSuccess = { root.showSnackBar("Berhasil reset usia") },
+                onError = { throwable ->
+                    root.showSnackBar(throwable.message.orEmpty())
+                }
+            )
+        }
     }
 
     private fun initObserveResult() {

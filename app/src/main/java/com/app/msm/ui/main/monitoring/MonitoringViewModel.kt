@@ -9,6 +9,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 
@@ -18,6 +19,8 @@ class MonitoringViewModel : ViewModel() {
     val monitoringViewState = _monitoringViewState.receiveAsFlow()
 
     private val monitoringReference: DatabaseReference by lazy { FirebaseProvider.monitoringReference }
+
+    private val ageReference: DatabaseReference by lazy { FirebaseProvider.ageReference }
 
     private val monitoredDataValueListener: ValueEventListener = object : ValueEventListener {
         override fun onDataChange(snapshot: DataSnapshot) = handleOnDataChange(snapshot)
@@ -42,5 +45,15 @@ class MonitoringViewModel : ViewModel() {
         } catch (e: Exception) {
             _monitoringViewState.trySend(ViewState.Error(e))
         }
+    }
+
+    fun resetAge(
+        onSuccess: () -> Unit,
+        onError: (Throwable) -> Unit
+    ) {
+        ageReference.setValue(0)
+            .addOnCanceledListener { onError.invoke(CancellationException()) }
+            .addOnFailureListener { exception -> onError.invoke(exception) }
+            .addOnSuccessListener { onSuccess.invoke() }
     }
 }
